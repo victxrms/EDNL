@@ -124,3 +124,34 @@ int tresNietos_rec(typename Abin<T>::nodo n, const Abin<T> &a)
     else return contador;
 }
 
+
+//Borrar nodos a partir de condición específica 
+//Nodo con elemento X -> Ej: a.elemento() == 3
+
+template <typename T>
+void elementoPoda(Abin<T> &a)
+{
+	elementoPoda_rec(a.raiz, a);
+}
+
+template <typename T>
+void elementoPoda_rec(typename Abin<T>::nodo n , Abin <T> &a)
+{
+	if (n != a.NODO_NULO)
+		if (a.elemento(n) == 3)
+		cortar(n, a);
+		else {elementoPoda_rec(a.hijoIzqdo(n), a); elementoPoda_rec(a.hijoDrcho(n), a)};
+}
+
+template <typename T>
+void cortar(typename Abin<T>::nodo n , Abin <T> &a)
+{
+	if (a.hijoIzqdo(n) == a.NODO_NULO)
+		a.eliminarHijoIzqdo(n);
+	else cortar{(a.hijoIzqdo(n), a); (a.hijoDrcho(n), a);}
+
+	if (a.hijoDrcho(n) == a.NODO_NULO)
+		a.eliminarHijoDrcho(n);
+	else cortar{(a.hijoIzqdo(n), a); (a.hijoDrcho(n), a);}
+}
+
