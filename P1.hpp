@@ -19,7 +19,7 @@ int contar_rec(typename Abin<T>::nodo n, const Abin<T> &a)
     static cont = 0;
     if (n == Abin<t>::NODO_NULO)
         return cont;
-    else cont += contar_rec(a.hijoIzqdo(n), a) + contar_rec(a.hijoDrcho(n), a);
+    else cont++ += contar_rec(a.hijoIzqdo(n), a) + contar_rec(a.hijoDrcho(n), a);
 }
 
 //Ejercicio 2
