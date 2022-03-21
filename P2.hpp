@@ -13,7 +13,7 @@ bool similar (const Abin <T> &a, const Abin <T> &b)
     if (a.arbolVacio() && b.arbolVacio())
         return true
     else
-        return similar_rec(a.raiz, b.raiz);
+        return similar_rec(a.raiz, b.raiz, a, b);
 }
 
 template <typename T>
