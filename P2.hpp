@@ -155,3 +155,42 @@ void cortar(typename Abin<T>::nodo n , Abin <T> &a)
 	else cortar{(a.hijoIzqdo(n), a); (a.hijoDrcho(n), a);}
 }
 
+
+//Buscar nodos con X condición
+//Nodos nostalgicos -> Aquellos nodos con mas antecesores que predecesores
+
+template <typename T>
+int nodosNostalgicos(Abin <T> &a)
+{
+    return nodosNostalgicos_rec(a.raiz, a);
+}
+
+template <typename T>
+int nodosNostalgicos_rec(typename Abin<T>::nodo n, Abin <T> a)
+{
+
+    if (n == a.NODO_NULO)
+        return 0;
+    if (contarPredecesor(n, a) > contarSucesor(n, a))
+        return 1 + nodosNostalgicos_rec(a.hijoDrcho(n), a) + nodosNostalgicos_rec(a.hijoIzqdo(n), a);
+}
+
+template <typename T>
+int contarPredecesor(typename Abin<T>::nodo n, Abin <T> a)
+{
+    static cont = 0;
+    if (n == a.NODO_NULO)
+        return cont;
+    else
+        return (1 + contarPredecesor(a.padre(n), a));
+}
+
+template <typename T>
+int contarSucesor(typename Abin<T>::nodo n, Abin <T> a)
+{
+    static cont = 0;
+    if (n == a.NODO_NULO)
+        return cont;
+    else
+        return (1 + contarSucesor(a.hijoDrcho(n), a) + contarSucesor(a.hijoIzqdo(n), a));
+}
